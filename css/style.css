@@ -1,0 +1,449 @@
+/* --- reset --- */
+.ComboSearch * {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.ComboSearch *:focus,
+.ComboSearch a:focus,
+.ComboSearch input:focus,
+.ComboSearch button:focus,
+.ComboSearch select:focus {
+    outline: none;
+}
+
+.ComboSearch input[disabled] {
+    background-color: #f9f9f9 !important;
+    border-color: #e1e1e1;
+}
+
+.ComboSearch input[disabled]:hover {
+    cursor: not-allowed;
+}
+
+.ComboSearch input[disabled]::-webkit-input-placeholder {
+    color: #e1e1e1;
+}
+
+.ComboSearch input[disabled]:-moz-placeholder {
+    /* Firefox 18- */
+    color: #e1e1e1;
+}
+
+.ComboSearch input[disabled]::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #e1e1e1;
+}
+
+.ComboSearch input[disabled]:-ms-input-placeholder {
+    color: #e1e1e1;
+}
+
+.ComboSearch input[type="email"]:focus,
+.ComboSearch input[type="password"]:focus {
+    outline-width: 2px;
+}
+
+.ComboSearch input[type="search"]:focus,
+.ComboSearch input[type="text"]:focus {
+    outline: 1px solid #45B3E3;
+}
+
+.ComboSearch label {
+    font-weight: normal;
+    /*color: #595959;*/
+}
+
+.ComboSearch ::-webkit-input-placeholder {
+    /* Chrome */
+    color: #bcbcbc;
+    font-family: font-light, sans-serif;
+}
+
+.ComboSearch :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #bcbcbc;
+    font-family: font-light, sans-serif;
+}
+
+.ComboSearch ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #bcbcbc;
+    font-family: font-light, sans-serif;
+    opacity: 1;
+}
+
+.ComboSearch :-moz-placeholder {
+    /* Firefox 4 - 18 */
+    color: #bcbcbc;
+    font-family: font-light, sans-serif;
+    opacity: 1;
+}
+
+.ComboSearch input[type=text]:-webkit-autofill,
+.ComboSearch input[type=text]:-webkit-autofill:hover,
+.ComboSearch input[type=text]:-webkit-autofill:focus,
+.ComboSearch input[type=text]:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 42px white inset !important;
+}
+
+/* --- select override styles --- */
+.ComboStyleOverride .combo-select {
+    min-width: 180px;
+}
+.ComboStyleOverride .combo-select .combo-select-body {
+    border-radius: 2px;
+    font-size: 14px;
+    border-color: #bcbcbc;
+}
+.ComboStyleOverride .combo-select .combo-select-body .combo-select-item {
+    white-space: nowrap;
+}
+.ComboStyleOverride .combo-select .combo-select-body .combo-select-item.selected i {
+    color: #595959;
+}
+.ComboStyleOverride .combo-select i {
+    color: #595959;
+}
+.ComboStyleOverride .combo-select .search-input {
+    border-radius: 2px;
+    border: 1px solid #bcbcbc !important;
+}
+.ComboStyleOverride .combo-select-head {
+    border: 1px solid #bcbcbc;
+    border-radius: 2px;
+    font-size: 14px;
+    /*line-height: 2.6;*/
+    line-height: 42px;
+    padding-left: 19px;
+    color: #595959;
+    height: 42px;
+    width: auto;
+    min-width: 180px;
+    cursor: pointer;
+    vertical-align: top;
+}
+@media (max-width: 640px) {
+    .ComboStyleOverride .combo-select-head {
+        width: 100%;
+    }
+}
+
+/* --- datepicker style override --- */
+.Datepicker {
+    position: relative;
+}
+
+.Datepicker__icon {
+    background: url('./svg/calendar.svg') no-repeat center center;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 15px;
+    top: 11px;
+    color: #595959;
+    pointer-events: none;
+}
+
+.Datepicker.Datepicker--pushDown {
+    margin-top: 25px;
+}
+
+@media (max-width: 767px) {
+    .Datepicker.Datepicker--pushDown {
+        margin-top: 45px;
+    }
+}
+
+.DatepickerSeparator {
+    display: inline-block;
+    width: 6.57%;
+    font-weight: bold;
+    font-size: 15px;
+    color: #595959;
+    text-align: center;
+}
+
+.rdtPrev span,
+.rdtNext span,
+.rdtBtn {
+    color: #45B3E3;
+}
+
+/* --- util --- */
+.InputBox {
+    padding: 11px 15px;
+    border: 1px solid #bcbcbc;
+    width: 100%;
+    height: 42px;
+    display: block;
+    outline: 1px solid transparent;
+    transition: all .2s ease-in-out;
+}
+
+.InputBox:focus {
+    outline: 1px solid #45B3E3;
+}
+
+.Button {
+    display: inline-block;
+    height: 42px;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 2px;
+    border-width: 0 0 2px;
+    border-style: solid;
+    min-width: 100px;
+    transition: background-color 0.4s;
+    padding: 2px 6px;
+    line-height: 2.4;
+    text-align: center;
+    z-index: 5;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.Button.Button--action {
+     color: #fff;
+     background-color: #45B3E3;
+     border-color: #068fc5;
+     min-width: 145px;
+
+}
+
+.Button.Button--action:focus,
+.Button.Button--action:hover {
+    background-color: #75d1f9;
+}
+
+.Button.Button--action:disabled {
+    color: #fff;
+    background-color: #D7D7D7;
+    border-color: #3D3D3D;
+    transition: background-color 0.4s;
+    cursor: not-allowed;
+}
+
+
+/* --- main --- */
+.ComboSearch {
+    background-color: #fff;
+    border: solid 1px #bcbcbc;
+    padding: 24px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ComboSearch > p {
+    flex: 0 1 100%;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .ComboSearch {
+        display: block;
+    }
+}
+
+.combo-select {
+    /*min-width: 180px;*/
+}
+
+.ComboStyleOverride {
+    flex: 1 0 28%;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+    .ComboStyleOverride {
+        margin-right: 2%;
+        margin-bottom: 0;
+    }
+}
+
+.ComboSearch__inputWrapper {
+    position: relative;
+    flex: 1 0 70%;
+}
+
+.ComboSearch__input {
+     padding-left: 49px;
+     height: 42px;
+}
+
+.ComboSearch__inputIcon {
+    display: inline-block;
+    background: url('./svg/search.svg') no-repeat center center;
+    background-size: 34px;
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    left: 15px;
+    top: 4px;
+}
+
+.ComboSearch__input:required {
+    box-shadow: none;
+}
+
+.ComboSearch__input:invalid {
+    box-shadow: none;
+}
+
+.ComboSearch__datePicker {
+    background-color: #fff;
+    display: flex;
+    flex: 1 0 70%;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .ComboSearch__datePicker {
+        display: block;
+    }
+}
+
+.ComboSearch__datePickerRadio {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1 0 50%;
+    height: 42px;
+}
+
+@media (min-width: 768px) {
+    .ComboSearch__datePickerRadio {
+        margin-left: -2%;
+    }
+}
+
+@media (max-width: 640px) {
+    .ComboSearch__datePickerRadio {
+        flex: 0 1 100%;
+    }
+}
+
+.ComboSearch__datePickerWrapper {
+    flex: 1 0 50%;
+    height: 42px;
+    position: relative;
+}
+
+@media (max-width: 640px) {
+    .ComboSearch__datePickerRadio {
+        flex: 0 1 100%;
+        margin-bottom: 16px;
+    }
+}
+
+.ComboSearch__formError {
+    position: absolute;
+    z-index: 10;
+    top: 54px;
+    left: 0;
+    background-color: #e80029;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.ComboSearch__formError:after {
+    bottom: 100%;
+    left: 20%;
+    border: 10px solid rgba(232, 0, 41, 0);
+    border-bottom-color: #e80029;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    margin-left: -10px;
+}
+
+.RadioGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.RadioGroup input {
+    display: none;
+}
+
+.RadioGroup__label {
+    margin: 0 1.5%;
+    display: flex;
+    flex: 1 0 47%;
+    justify-content: center;
+    align-items: center;
+    max-width: 131px;
+    height: 42px;
+    border-radius: 21px;
+    color: #aeaeae;
+    background-color: #fff;
+    border: solid 1px #bcbcbc;
+    cursor: pointer;
+}
+
+.RadioGroup__label--checked {
+    color: #fff;
+    background-color: #02355b;
+    border: solid 1px #02355b;
+}
+
+.FilterBar {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+    padding-top: 16px;
+    flex: 0 1 110%;
+}
+
+.FilterBar__filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    min-width: 90px;
+    min-height: 60px;
+    padding: 6px 34px 6px 6px;
+    background-color: #3d3d3d;
+    margin: 10px;
+}
+
+.FilterBar__filterText {
+    margin: 2px 0;
+    width: 100%;
+    color: #fff;
+}
+
+.FilterBar__filterClose {
+    color: #595959;
+    background: url('./svg/close-white.svg') no-repeat center center;
+    background-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.FilterBar__filter.FilterBar__filter--disabled {
+    background-color: #bcbcbc;
+}
+
+.FilterBar__filter.FilterBar__filter--disabled .FilterBar__filterClose {
+    cursor: not-allowed;
+}
+
