@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ComboSelect from 'react-combo-select';
 import DateTimeField from 'react-datetime';
 import isEqual from 'lodash.isequal';
+import omit from 'lodash.omit';
 import moment from 'moment';
 
 import RadioGroup from './RadioGroup';
@@ -28,7 +29,9 @@ export default class ComboSearch extends React.Component {
         this.onInputChange = ::this.onInputChange;
         this.validateTextInput = ::this.validateTextInput;
         this.clearErrorMessage = ::this.clearErrorMessage;
+        this.onDateChange = ::this.onDateChange;
         this.submitOnDateChange = ::this.submitOnDateChange;
+        this.getFilters = ::this.getFilters;
     }
 
     static defaultProps = {
@@ -82,6 +85,7 @@ export default class ComboSearch extends React.Component {
 
     changeCriteria(value, text) {
         this.setState({searchCriteria: value, selectText: text, inputText: undefined, date: undefined});
+        this.clearErrorMessage();
     }
 
     handleSubmit(event) {
@@ -97,7 +101,7 @@ export default class ComboSearch extends React.Component {
             }
 
             const filterAlreadyExists = this.state.appliedFilters.some(filter => {
-                return isEqual(filter, data);
+                return isEqual(omit(filter, ['momentDate']), omit(data, ['momentDate']));
             });
             if (this.state.momentDate) {
                 data.momentDate = this.state.momentDate;
@@ -106,30 +110,36 @@ export default class ComboSearch extends React.Component {
             if (filterAlreadyExists) {
                 this.setState({
                     inputTextError: 'Filter already exists!',
+                    datePickerError: 'Filter already exists!',
                 });
             } else {
                 if (this.props.simpleVersion) {
+                    this.setState({inputText: ''});
                     this.props.onSearch(data);
                 } else {
-                    this.props.onSearch([...this.state.appliedFilters, {...data}]);
+                    const filters = this.getFilters(data);
+                    this.props.onSearch(filters);
 
                     this.setState({
-                        appliedFilters: [...this.state.appliedFilters, {...data}],
+                        appliedFilters: filters,
+                        inputText: ''
                     });
                 }
             }
         }
     };
 
-    submitOnDateChange(momentDate) {
-        if (this.props.hasButton) {
-            this.setState({momentDate, date: moment(momentDate).format(this.props.dateFormat)});
-        } else {
-            this.setState({
-                momentDate, date: moment(momentDate).format(this.props.dateFormat)
-            }, this.handleSubmit.bind(null));
-        }
+    onDateChange(momentDate) {
+        this.setState({
+            momentDate,
+            date: moment(momentDate).format(this.props.dateFormat)
+        }, this.submitOnDateChange.bind(this));
+    };
 
+    submitOnDateChange() {
+        if (!this.props.hasButton) {
+            this.handleSubmit();
+        }
     };
 
     removeFilter = data => {
@@ -167,6 +177,7 @@ export default class ComboSearch extends React.Component {
     clearErrorMessage() {
         this.setState({
             inputTextError: undefined,
+            datePickerError: undefined,
         });
     };
 
@@ -174,6 +185,15 @@ export default class ComboSearch extends React.Component {
         this.setState({
             inputText: event.target.value,
         });
+    };
+
+    getFilters(newFilter) {
+        let newFilters = this.state.appliedFilters.filter((filter) => {
+            return !((filter.search === 'before' || filter.search === 'after') && newFilter.search === filter.search);
+        });
+        newFilters.push(newFilter);
+
+        return newFilters;
     };
 
     render() {
@@ -226,15 +246,16 @@ export default class ComboSearch extends React.Component {
                             <div className={this.props.classNames.datePickerWrapper}>
                                 {this.props.datePickerRenderFn
                                     ? this.props.datePickerRenderFn(
-                                        this.submitOnDateChange,
+                                        this.onDateChange,
                                         ...datePickerRenderFnArgs
                                     )
                                     : <DateTimeField
-                                        onChange={this.submitOnDateChange}
+                                        onChange={this.onDateChange}
                                         dateFormat={this.props.dateFormat}
                                         timeFormat={false}
                                         isValidDate={this.props.validDateFilter}
                                         closeOnSelect={true}
+                                        onBlur={this.clearErrorMessage}
                                         inputProps={{
                                             name: 'date',
                                             disabled: this.props.isInFetchingState,
@@ -245,6 +266,11 @@ export default class ComboSearch extends React.Component {
                                         {...this.props.additionalDatePickerProps}
                                     />}
                                 <i className="Datepicker__icon"> </i>
+                                {this.state.datePickerError ? (
+                                    <span className="ComboSearch__formError">{this.state.datePickerError}</span>
+                                ) : (
+                                    false
+                                )}
                             </div>
                         </div>
                     ) : (

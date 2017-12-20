@@ -147,6 +147,19 @@ describe('Form submit', () => {
         search.unmount();
     });
 
+    it('clears input text on submit', () => {
+        const cb = sinon.spy();
+        const search = mount(<ComboSearch onSearch={cb} selectData={selectData} />);
+
+        search.find('.ComboSearch__input').simulate('change', { target: { value: 'Hello' } });
+        search.simulate('submit', { preventDefault() {} });
+
+        expect(search.find('.ComboSearch__input').props().value.length).to.equal(0);
+        expect(search.state().inputText.length).to.equal(0);
+
+        search.unmount();
+    });
+
 });
 
 describe('onSearch arguments', () => {
@@ -227,10 +240,22 @@ describe('Validation of input', () => {
         search.unmount();
     });
 
-    it('shows error message', () => {
+    it('shows error message on text input', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} />);
 
+        search.simulate('submit', { preventDefault() {} });
+
+        expect(search.find('.ComboSearch__formError')).to.be.truthy;
+
+        search.unmount();
+    });
+
+    it('shows error message on date picker', () => {
+        const cb = sinon.spy();
+        const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
+
+        search.setState({ searchCriteria: 'Date' });
         search.simulate('submit', { preventDefault() {} });
 
         expect(search.find('.ComboSearch__formError')).to.be.truthy;
@@ -281,6 +306,50 @@ describe('Validation of input', () => {
         search.find('.ComboSearch__input').simulate('blur');
 
         expect(search.find('.ComboSearch__formError').length).to.equal(0);
+
+        search.unmount();
+    });
+
+    it('clears error message on select switch', () => {
+        const cb = sinon.spy();
+        const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
+
+        search.setState({ searchCriteria: 'Date' });
+        search.simulate('submit', { preventDefault() {} });
+
+        expect(search.find('.ComboSearch__formError')).to.be.truthy;
+
+        search.setState({ searchCriteria: 'Role' });
+
+        expect(search.find('.ComboSearch__formError').length).to.equal(0);
+
+        search.unmount();
+    });
+
+    it('replaces before date filter with new before date filter', () => {
+        const cb = sinon.spy();
+        const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
+
+        search.setState({
+            searchCriteria: 'Date',
+            beforeOrAfter: 'before',
+            date: moment(new Date(2017, 11, 21)).format('DD MMM YYYY'),
+            momentDate: moment(new Date(2017, 11, 21))
+        });
+        search.simulate('submit', { preventDefault() {} });
+
+        search.setState({
+            searchCriteria: 'Date',
+            beforeOrAfter: 'before',
+            date: moment(new Date(2017, 11, 12)).format('DD MMM YYYY'),
+            momentDate: moment(new Date(2017, 11, 12))
+        });
+        search.simulate('submit', { preventDefault() {} });
+
+        expect(search.state().appliedFilters[0]).to.include({
+            search: 'before',
+            date: moment(new Date(2017, 11, 12)).format('DD MMM YYYY'),
+        });
 
         search.unmount();
     });
