@@ -55,41 +55,41 @@ export default class FakeComponent extends Component {
 ```
 
 ### classNames
-If you decide on using existing components, you may want to style them differently. You can also pass any prop to style these two in additionalSelectProps and additionalDatePickerProps, see next table.
+If you decide on using existing components, you may want to style them differently. You can also pass any prop to style these two in additionalSelectProps and additionalDatePickerProps, see next table. 
 
-| Property         | Default | Description |
-| ------------ | ------- | ------- | ----------- |
-| **classNames** | --- | Object containing classnames listed below
-| **classNames.wrapper** | ComboSearch | Component root element
-| **classNames.datePickerRadioWrapper** | ComboSearch__datePicker | Element wrapping radio buttons and date picker input
-| **classNames.radioGroupWrapper**  | ComboSearch__datePickerRadio | Element wrapping radio buttons component
-| **classNames.radioGroup** | radioGroup | Root element of radio group component
-| **classNames.datePickerWrapper** | ComboSearch__datePickerWrapper | Element wrapping date picker component
-| **classNames.textInput** | ComboSearch__input InputBox | Text input field
-| **classNames.button** | Button Button--action | Apply button, should you choose to use it
+| Property | Default | Description |
+| ------------ | ------- | ----------- |
+| **classNames** | --- | Object containing classnames listed below |
+| **classNames.wrapper** | ComboSearch | Component root element |
+| **classNames.datePickerRadioWrapper** | ComboSearch__datePicker | Element wrapping radio buttons and date picker input |
+| **classNames.radioGroupWrapper** | ComboSearch__datePickerRadio | Element wrapping radio buttons component |
+| **classNames.radioGroup** | radioGroup | Root element of radio group component |
+| **classNames.datePickerWrapper** | ComboSearch__datePickerWrapper | Element wrapping date picker component |
+| **classNames.textInput** | ComboSearch__input InputBox | Text input field |
+| **classNames.button** | Button Button--action | Apply button, should you choose to use it |
 
 ### All props
 
 | Property         | Type    | Default | Description |
 | ------------ | ------- | ------- | ----------- |
 | **onSearch** | function | none | Callback to invoke on filter apply, gets passed form data as only argument
-| **selectData** | array of strings | none | Data for react-combo-select to populate select with options
-| **datePickerCriteria** | string | none | One of the option from selectData prop on which we want to open a date picker
-| **selectRenderFn** | function | none | Function that returns jsx for select your custom component. Since select is a controlled component this function will get called like selectRenderFn(selectData, selectedText, selectedValue, changeCallback, ...yourArguments), where returning component sets its options to selectData, text to selectedText(optional), value to selectedValue and onChange to changeCallback. 
-| **selectRenderFnArgs** | array | none | Array of arguments that will get passed to selectRenderFn that you passed. Eg [1, 2, 3] will get spread as arguments
-| **datePickerRenderFn** | function | none | Similar to selectRenderFn, will get called as datePickerRenderFn(changeCallback, ..yourArgs)
-| **datePickerRenderFnArgs** | array | none | I'll make sure they find their way to datePickerRenderFn
+| **selectData** | array of strings | none | Data for **react-combo-select** to populate select with options
+| **datePickerCriteria** | string | none | One of the option from **selectData** prop on which we want to open a date picker
+| **selectRenderFn** | function | none | Function that returns jsx for your custom select component. Since select is a controlled component this function will get called like **selectRenderFn(selectData, selectedText, selectedValue, changeCallback, ...yourArguments)**, where returning component sets its options to selectData, text to selectedText(optional), value to selectedValue and onChange to changeCallback. 
+| **selectRenderFnArgs** | array | none | Array of arguments that will get passed to **selectRenderFn** that you passed. Eg [1, 2, 3] will get spread as arguments
+| **datePickerRenderFn** | function | none | Similar to selectRenderFn, will get called as **datePickerRenderFn(changeCallback, ..yourArgs)**
+| **datePickerRenderFnArgs** | array | none | I'll make sure they find their way to **datePickerRenderFn**
 | **simpleVersion** | boolean | false | If true, filter bar will not show and instead of accumulating filters, every submit will be separate
 | **showRadioButtons** | boolean | true | If false, the buttons will not render
 | **hasButton** | boolean | false | Shows "apply" button, and doesn't submit upon selecting date.
 | **isInFetchingState** | boolean | false | If true, component will go into state where submit, destroying filters and date picker is disabled and there is visual indication that some data is being filtered
-| **selectDefaultValue** | string | First item in selectData prop | option that is preselected in react-combo-select on component render 
+| **selectDefaultValue** | string | First item in **selectData** prop | option that is preselected in **react-combo-select** on component render 
 | **validationCallback** | function | (value) => { return value && value.length >= 3; } | Function to run to validate text input, will get called with value as argument
 | **inputErrorMessage** | string | "This field is required and should be at least 3 characters long" | Message to display if validation fails
 | **dateFormat** | string | "DD MMM YYYY" | Prop to pass to date picker, takes any valid moment.js format
-| **validDateFilter** | function | none | Function to validate which dates can be picked. See react-datetime docs for more info 
-| **additionalSelectProps** | object | none | Object to spread on react-combo-select as props. Takes any props react-combo-select takes
-| **additionalDatePickerProps** | object | none | Object to spread on react-datetime as props. Takes any props react-datetime takes
+| **validDateFilter** | function | none | Function to validate which dates can be picked. See [react-datetime](https://www.npmjs.com/package/react-datetime) docs for more info 
+| **additionalSelectProps** | object | none | Object to spread on **react-combo-select as props**. Takes any props react-combo-select takes
+| **additionalDatePickerProps** | object | none | Object to spread on **react-datetime** as props. Takes any props react-datetime takes
 
 ### Customizing and contributing
 
