@@ -14,10 +14,6 @@ export default class RadioGroup extends React.Component {
         defaultChecked: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         data: PropTypes.array.isRequired,
-        wrapperClassName: PropTypes.string,
-        labelClassName: PropTypes.string,
-        fakeRadioClassName: PropTypes.string,
-        fakeRadioInnerClassName: PropTypes.string,
         disabled: PropTypes.bool,
     };
 
@@ -28,31 +24,24 @@ export default class RadioGroup extends React.Component {
     };
 
     render() {
-        const wrapperClassName = this.props.wrapperClassName ? this.props.wrapperClassName : 'RadioGroup';
-        const labelClassName = this.props.labelClassName ? this.props.labelClassName : 'RadioGroup__label';
-        const fakeRadioClassName = this.props.fakeRadioClassName ? this.props.fakeRadioClassName : 'RadioGroup__fakeRadio';
-        const fakeRadioInnerClassName = this.props.fakeRadioInnerClassName
-            ? this.props.fakeRadioInnerClassName
-            : 'RadioGroup__fakeRadioInner';
-
         return (
-            <div className={wrapperClassName}>
+            <div className={this.props.classNames.wrapper}>
                 {this.props.data.map(item => {
                     return (
                         <label
                             key={item.value}
                             className={this.state.checked === item.value
-                            ? `${labelClassName} ${labelClassName}--checked`
-                            : labelClassName}
+                            ? `${this.props.classNames.label} ${this.props.classNames.label}--checked`
+                            : this.props.classNames.label}
                         >
 							<span
                                 className={
                                     this.state.checked === item.value
-                                        ? `${fakeRadioClassName} ${fakeRadioClassName}--checked`
-                                        : fakeRadioClassName
+                                        ? `${this.props.classNames.fakeRadio} ${this.props.classNames.fakeRadio}--checked`
+                                        : this.props.classNames.fakeRadio
                                 }
                             >
-								<span className={fakeRadioInnerClassName} />
+								<span className={this.props.classNames.fakeRadioInner} />
 							</span>
                             <input
                                 type="radio"

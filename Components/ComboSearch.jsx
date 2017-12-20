@@ -35,11 +35,22 @@ export default class ComboSearch extends React.Component {
         classNames: {
             wrapper: 'ComboSearch',
             datePickerRadioWrapper: 'ComboSearch__datePicker',
-            radioGroupWrapper: 'ComboSearch__datePickerRadio',
-            radioGroup: 'radioGroup',
+            radioGroupWrapper: 'ComboSearch__RadioWrapper',
             datePickerWrapper: 'ComboSearch__datePickerWrapper',
             textInput: 'ComboSearch__input InputBox',
             button: 'Button Button--action',
+        },
+        radioGroupClassNames: {
+            wrapper: 'RadioGroup',
+            label: 'RadioGroup__label',
+            fakeRadio: 'RadioGroup__fakeRadio',
+            fakeRadioInner: 'RadioGroup__fakeRadioInner',
+        },
+        filterBarClassNames: {
+            wrapper: 'FilterBar',
+            filter: 'FilterBar__filter',
+            removeButton: 'FilterBar__filterClose',
+            text: 'FilterBar__filterText',
         },
         dateFormat: 'DD MMM YYYY',
         showRadioButtons: true,
@@ -209,10 +220,7 @@ export default class ComboSearch extends React.Component {
                                                 value: 'after',
                                             },
                                         ]}
-                                        wrapperClassName={this.props.classNames.RadioGroupWrapper}
-                                        labelClassName={this.props.classNames.RadioGroupLabel}
-                                        fakeRadioClassName={this.props.classNames.RadioGroupFakeRadio}
-                                        fakeRadioInnerClassName={this.props.classNames.RadioGroupFakeRadioInner}
+                                        classNames={this.props.radioGroupClassNames}
                                     /> : null}
                             </div>
                             <div className={this.props.classNames.datePickerWrapper}>
@@ -280,6 +288,7 @@ export default class ComboSearch extends React.Component {
                             filters={this.state.appliedFilters}
                             removeFilter={this.removeFilter}
                             disabled={this.props.isInFetchingState}
+                            classNames={this.props.filterBarClassNames}
                         />
                     ) : (
                         false

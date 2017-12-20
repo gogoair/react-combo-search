@@ -62,11 +62,20 @@ If you decide on using existing components, you may want to style them different
 | **classNames** | --- | Object containing classnames listed below |
 | **classNames.wrapper** | ComboSearch | Component root element |
 | **classNames.datePickerRadioWrapper** | ComboSearch__datePicker | Element wrapping radio buttons and date picker input |
-| **classNames.radioGroupWrapper** | ComboSearch__datePickerRadio | Element wrapping radio buttons component |
-| **classNames.radioGroup** | radioGroup | Root element of radio group component |
+| **classNames.radioGroupWrapper** | ComboSearch__RadioWrapper | Element wrapping radio buttons component |
 | **classNames.datePickerWrapper** | ComboSearch__datePickerWrapper | Element wrapping date picker component |
 | **classNames.textInput** | ComboSearch__input InputBox | Text input field |
 | **classNames.button** | Button Button--action | Apply button, should you choose to use it |
+| **radioGroupClassNames** | --- | Object containing classnames for RadioGroup component listed below |
+| **radioGroupClassNames.wrapper** | RadioGroup | Component root element |
+| **radioGroupClassNames.label** | RadioGroup__label | Class name for label |
+| **radioGroupClassNames.fakeRadio** | RadioGroup__fakeRadio | Outer span that can act as a fake radio button |
+| **radioGroupClassNames.fakeRadioInner** | RadioGroup__fakeRadioInner | Inner span that can act as a part of a fake radio button |
+| **filterBarClassNames** | --- | Object containing classnames for FilterBar component listed below |
+| **filterBarClassNames.wrapper** | FilterBar | Component root element |
+| **filterBarClassNames.filter** | FilterBar__filter | Class name for individual filter, black card wih filter info |
+| **filterBarClassNames.removeButton** | FilterBar__filterClose | Span tag that destroys filter on click |
+| **filterBarClassNames.text** | FilterBar__filterText | Paragraph tag containing text inside the filter card |
 
 ### All props
 

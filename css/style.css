@@ -308,7 +308,13 @@
     }
 }
 
-.ComboSearch__datePickerRadio {
+@media (min-width: 768px) {
+    .ComboSearch__datePicker {
+        margin-left: -2%;
+    }
+}
+
+.ComboSearch__RadioWrapper {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -316,14 +322,8 @@
     height: 42px;
 }
 
-@media (min-width: 768px) {
-    .ComboSearch__datePickerRadio {
-        margin-left: -2%;
-    }
-}
-
 @media (max-width: 640px) {
-    .ComboSearch__datePickerRadio {
+    .ComboSearch__RadioWrapper {
         flex: 0 1 100%;
     }
 }
@@ -335,7 +335,7 @@
 }
 
 @media (max-width: 640px) {
-    .ComboSearch__datePickerRadio {
+    .ComboSearch__RadioWrapper {
         flex: 0 1 100%;
         margin-bottom: 16px;
     }

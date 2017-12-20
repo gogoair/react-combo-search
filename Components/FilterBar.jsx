@@ -15,23 +15,23 @@ const FilterBar = props => {
     };
 
     return (
-        <div className="FilterBar">
+        <div className={props.classNames.wrapper}>
             {props.filters.map((filter, i) => {
                 return (
                     <div
                         className={
                             !props.disabled
-                                ? 'FilterBar__filter'
-                                : 'FilterBar__filter FilterBar__filter--disabled'
+                                ? props.classNames.filter
+                                : `${props.classNames.filter} ${props.classNames.filter}--disabled`
                         }
                         key={filter.criteria + filter.search + i}
                         data-automation="regionComboSearchFilterBar"
                     >
-                        <span className="FilterBar__filterClose" onClick={destroyFilter.bind(null, filter)} data-automation="actionComboSearchDestroyFilter"/>
-                        <p className="FilterBar__filterText" data-automation="textComboSearchFilterCriteria">{filter.criteria}</p>
+                        <span className={props.classNames.removeButton} onClick={destroyFilter.bind(null, filter)} data-automation="actionComboSearchDestroyFilter"/>
+                        <p className={props.classNames.text} data-automation="textComboSearchFilterCriteria">{filter.criteria}</p>
                         {filter.date
-                            ? <p className="FilterBar__filterText" data-automation="textComboSearchFilterSearchDate">{filter.search ? capitalize(filter.search) : ''} {filter.date}</p>
-                            : <p className="FilterBar__filterText" data-automation="textComboSearchFilterSearchText">{filter.search}</p>}
+                            ? <p className={props.classNames.text} data-automation="textComboSearchFilterSearchDate">{filter.search ? capitalize(filter.search) : ''} {filter.date}</p>
+                            : <p className={props.classNames.text} data-automation="textComboSearchFilterSearchText">{filter.search}</p>}
                     </div>
                 );
             })}
