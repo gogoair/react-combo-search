@@ -1,6 +1,6 @@
 {
   "name": "react-combo-search",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "keywords": [
     "react",
     "search",
@@ -54,7 +54,7 @@
     "prettier": "^1.9.2",
     "react": "^16.2.0",
     "react-combo-select": "^1.1.2",
-    "react-datetime": "MilosRasic/react-datetime",
+    "react-datetime": "gogoair/react-datetime",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-test-renderer": "^16.0.0",
