@@ -42,7 +42,7 @@ describe('Initialization of component', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={onSearchMock} selectData={selectData} datePickerRenderFn={cb} datePickerCriteria="Date" />);
 
-        search.setState({ searchCriteria: 'Date' });
+        search.setState({ criteria: 'Date' });
 
         expect(cb.calledOnce).to.be.true;
 
@@ -76,7 +76,7 @@ describe('Select filtering', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Team" />);
 
-        search.setState({ searchCriteria: 'Team' });
+        search.setState({ criteria: 'Team' });
 
         expect(search.find('.Datepicker__input').length).to.equal(1);
         expect(search.find('.ComboSearch__input').length).to.equal(0);
@@ -180,7 +180,7 @@ describe('onSearch arguments', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
 
-        search.setState({ searchCriteria: 'Date' });
+        search.setState({ criteria: 'Date' });
         search.find('.Datepicker__input').simulate('change', { target: { value: moment(new Date(2017, 12, 12)) } });
         search.simulate('submit', { preventDefault() {} });
 
@@ -255,7 +255,7 @@ describe('Validation of input', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
 
-        search.setState({ searchCriteria: 'Date' });
+        search.setState({ criteria: 'Date' });
         search.simulate('submit', { preventDefault() {} });
 
         expect(search.find('.ComboSearch__formError')).to.be.truthy;
@@ -314,12 +314,12 @@ describe('Validation of input', () => {
         const cb = sinon.spy();
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
 
-        search.setState({ searchCriteria: 'Date' });
+        search.setState({ criteria: 'Date' });
         search.simulate('submit', { preventDefault() {} });
 
         expect(search.find('.ComboSearch__formError')).to.be.truthy;
 
-        search.setState({ searchCriteria: 'Role' });
+        search.setState({ criteria: 'Role' });
 
         expect(search.find('.ComboSearch__formError').length).to.equal(0);
 
@@ -331,7 +331,7 @@ describe('Validation of input', () => {
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Date" />);
 
         search.setState({
-            searchCriteria: 'Date',
+            criteria: 'Date',
             beforeOrAfter: 'before',
             date: moment(new Date(2017, 11, 21)).format('DD MMM YYYY'),
             momentDate: moment(new Date(2017, 11, 21))
@@ -339,7 +339,7 @@ describe('Validation of input', () => {
         search.simulate('submit', { preventDefault() {} });
 
         search.setState({
-            searchCriteria: 'Date',
+            criteria: 'Date',
             beforeOrAfter: 'before',
             date: moment(new Date(2017, 11, 12)).format('DD MMM YYYY'),
             momentDate: moment(new Date(2017, 11, 12))
@@ -375,17 +375,36 @@ describe('Filters rendering', () => {
         const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Team" />);
 
         search.setState({ appliedFilters: [
-            { searchCriteria: 'Role', search: 'partner admin' },
-            { searchCriteria: 'Role', search: 'partner user' }
+            { criteria: 'Role', search: 'partner admin' },
+            { criteria: 'Role', search: 'partner user' }
         ] });
 
         expect(search.find('.FilterBar').length).to.equal(1);
         expect(search.find('.FilterBar__filter').length).to.equal(2);
 
-        search.setState({ appliedFilters: [{ searchCriteria: 'Role', search: 'partner admin' }] });
+        search.setState({ appliedFilters: [{ criteria: 'Role', search: 'partner admin' }] });
 
         expect(search.find('.FilterBar').length).to.equal(1);
         expect(search.find('.FilterBar__filter').length).to.equal(1);
+
+        search.unmount();
+    });
+
+    it('shouldn\'t add a duplicate filter', () => {
+        const cb = sinon.spy();
+        const search = mount(<ComboSearch onSearch={cb} selectData={selectData} datePickerCriteria="Team" />);
+
+        search.setState({ appliedFilters: [
+            { criteria: 'Role', search: 'partner admin' },
+            { criteria: 'Role', search: 'partner user' }
+        ] });
+
+        search.find('.ComboSearch__input').simulate('change', { target: { value: 'partner admin' }});
+        search.simulate('submit', { preventDefault() {} });
+
+
+        expect(search.state().appliedFilters.length).to.equal(2);
+        expect(search.find('.FilterBar__filter').length).to.equal(2);
 
         search.unmount();
     });

@@ -8,12 +8,15 @@ Comes with [react-combo-select](https://www.npmjs.com/package/react-combo-select
 Peer dependencies: React and react-dom. 
 Optional dependencies: react-combo-select, react-datetime *font-awesome(peer of react-combo-select) and moment(peer of react-datetime)
 ```javascript
-import ComboSearch from 'react-combo-search';
+import { ComboSearch } from 'react-combo-search';
 ```
 and include css file (you may include this in different way) *if you use react-combo-select and react-datetime you are gonna need their css also
 ```javascript
 require('../node_modules/react-combo-search/css/style.css');
 ```
+## Demo
+We prepared code sandbox demo. Unfortunately, we haven't found the time to add some generic data for you to filter, but you can freely play around with component ot get the feel of what it does.
+[See demo here](https://codesandbox.io/embed/y0nzvl80lx)
 
 ## props/options
 

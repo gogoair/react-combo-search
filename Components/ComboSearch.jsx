@@ -15,7 +15,7 @@ export default class ComboSearch extends React.Component {
         super(props);
 
         this.state = {
-            searchCriteria: this.props.selectDefaultValue || this.props.selectData[0],
+            criteria: this.props.selectDefaultValue || this.props.selectData[0],
             selectText: this.props.selectDefaultValue || this.props.selectData[0],
             beforeOrAfter: 'before',
             inputText: undefined,
@@ -84,7 +84,7 @@ export default class ComboSearch extends React.Component {
     };
 
     changeCriteria(value, text) {
-        this.setState({searchCriteria: value, selectText: text, inputText: undefined, date: undefined});
+        this.setState({criteria: value, selectText: text, inputText: undefined, date: undefined, momentDate: undefined});
         this.clearErrorMessage();
     }
 
@@ -101,6 +101,7 @@ export default class ComboSearch extends React.Component {
             }
 
             const filterAlreadyExists = this.state.appliedFilters.some(filter => {
+                console.log(filter, data);
                 return isEqual(omit(filter, ['momentDate']), omit(data, ['momentDate']));
             });
             if (this.state.momentDate) {
@@ -209,21 +210,21 @@ export default class ComboSearch extends React.Component {
                             ? this.props.selectRenderFn(
                                 this.props.selectData,
                                 this.state.selectText,
-                                this.state.searchCriteria,
+                                this.state.criteria,
                                 this.changeCriteria,
                                 ...selectRenderFnArgs
                             ) : <ComboSelect
                                 data={this.props.selectData}
                                 onChange={this.changeCriteria}
                                 text={this.state.selectText}
-                                value={this.state.searchCriteria}
+                                value={this.state.criteria}
                                 name="criteria"
                                 order="off"
                                 sort="off"
                                 {...this.props.additionalSelectProps}
                             />}
                     </div>
-                    {this.props.datePickerCriteria === this.state.searchCriteria ? (
+                    {this.props.datePickerCriteria === this.state.criteria ? (
                         <div className={this.props.classNames.datePickerRadioWrapper}>
                             <div className={this.props.classNames.radioGroupWrapper}>
                                 {this.props.showRadioButtons
@@ -283,7 +284,7 @@ export default class ComboSearch extends React.Component {
                                 ref={el => (this.textInput = el)}
                                 value={this.state.inputText || ''}
                                 className={this.props.classNames.textInput}
-                                placeholder={this.state.searchCriteria || this.props.selectData[0]}
+                                placeholder={this.state.criteria || this.props.selectData[0]}
                                 onChange={this.onInputChange}
                                 onBlur={this.clearErrorMessage}
                                 data-automation="fieldComboSearchTextInput"
