@@ -101,7 +101,6 @@ export default class ComboSearch extends React.Component {
             }
 
             const filterAlreadyExists = this.state.appliedFilters.some(filter => {
-                console.log(filter, data);
                 return isEqual(omit(filter, ['momentDate']), omit(data, ['momentDate']));
             });
             if (this.state.momentDate) {
