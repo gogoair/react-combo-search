@@ -12,9 +12,10 @@
   "description": "React search/filter component",
   "main": "./lib/ComboSearch.jsx",
   "scripts": {
+    "build": "./node_modules/babel-cli/bin/babel.js Components --out-dir lib",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.js  --hot --progress --colors --port 8081 --open",
     "test": "mocha -r mock-local-storage --compilers js:babel-core/register --require ./test/test.js \"test/**/*@(.test.js|.test.jsx)\"",
-    "prepublish": "rm -rf ./lib && mkdir lib && ./node_modules/.bin/babel Components/ComboSearch.jsx --out-file lib/ComboSearch.jsx && ./node_modules/.bin/babel lib/ComboSearch.jsx",
+    "prepublish": "npm run build",
     "postpublish": "rm -rf ./lib"
   },
   "repository": {
