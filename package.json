@@ -10,7 +10,7 @@
     "swiss knife"
   ],
   "description": "React search/filter component",
-  "main": "./lib/ComboSearch.jsx",
+  "main": "./lib/index.js",
   "scripts": {
     "build": "./node_modules/babel-cli/bin/babel.js Components --out-dir lib",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.js  --hot --progress --colors --port 8081 --open",
