@@ -15,8 +15,8 @@ export default class ComboSearch extends React.Component {
         super(props);
 
         this.state = {
-            criteria: this.props.selectDefaultValue.value || this.props.selectData[0].value,
-            selectText: this.props.selectDefaultValue.text || this.props.selectData[0].text,
+            criteria: this.props.selectDefaultValue.value || this.props.selectData[0] ? this.props.selectData[0].value : '',
+            selectText: this.props.selectDefaultValue.text || this.props.selectData[0] ? this.props.selectData[0].text : '',
             beforeOrAfter: 'before',
             inputText: undefined,
             inputTextError: undefined,
@@ -40,7 +40,7 @@ export default class ComboSearch extends React.Component {
             datePickerRadioWrapper: 'ComboSearch__datePicker',
             radioGroupWrapper: 'ComboSearch__RadioWrapper',
             datePickerWrapper: 'ComboSearch__datePickerWrapper',
-            textInput: 'ComboSearch__input InputBox',
+            textInput: 'ComboSearch__input Input',
             button: 'Button Button--action',
         },
         radioGroupClassNames: {
@@ -224,6 +224,7 @@ export default class ComboSearch extends React.Component {
                                 name="criteria"
                                 order="off"
                                 sort="off"
+                                disabled={this.props.selectData.length === 0}
                                 {...this.props.additionalSelectProps}
                             />}
                     </div>
@@ -264,7 +265,7 @@ export default class ComboSearch extends React.Component {
                                             name: 'date',
                                             disabled: this.props.isInFetchingState,
                                             readOnly: true,
-                                            className: 'Datepicker__input js-datepickerInput InputBox',
+                                            className: 'Datepicker__input js-datepickerInput Input',
                                             'data-automation': 'fieldComboSearchDatePicker',
                                         }}
                                         {...this.props.additionalDatePickerProps}a

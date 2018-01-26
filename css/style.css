@@ -172,7 +172,7 @@
 }
 
 /* --- util --- */
-.InputBox {
+.Input {
     padding: 11px 15px;
     padding-left: 49px;
     border: 1px solid #bcbcbc;
@@ -183,7 +183,7 @@
     transition: all .2s ease-in-out;
 }
 
-.InputBox:focus {
+.Input:focus {
     outline: 1px solid #45B3E3;
 }
 
