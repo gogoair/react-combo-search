@@ -28,7 +28,7 @@ const FilterBar = props => {
                         data-automation="regionComboSearchFilterBar"
                     >
                         <span className={props.classNames.removeButton} onClick={destroyFilter.bind(null, filter)} data-automation="actionComboSearchDestroyFilter"/>
-                        <p className={props.classNames.text} data-automation="textComboSearchFilterCriteria">{filter.criteria}</p>
+                        <p className={props.classNames.text} data-automation="textComboSearchFilterCriteria">{filter.selectText}</p>
                         {filter.date
                             ? <p className={props.classNames.text} data-automation="textComboSearchFilterSearchDate">{filter.search ? capitalize(filter.search) : ''} {filter.date}</p>
                             : <p className={props.classNames.text} data-automation="textComboSearchFilterSearchText">{filter.search}</p>}

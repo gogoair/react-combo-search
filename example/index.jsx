@@ -9,8 +9,12 @@ function render(Component) {
 			<div style={{ "padding": "30px" }}>
 				<Component
                     onSearch={(data) => { console.log(data) }}
-                    selectData={['Role', 'Partner', 'Team', 'Date']}
-                    datePickerCriteria='Date'
+                    selectData={[
+                        { value: 'role_name', text: 'Role' },
+                        { value: 'partner_code', text: 'Partner' },
+                        { value: 'created_date', text: 'Created date' },
+                    ]}
+                    datePickerCriteria='created_date'
                     isInFetchingState={false}
                 />
 			</div>

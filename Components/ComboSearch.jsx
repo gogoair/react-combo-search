@@ -15,8 +15,8 @@ export default class ComboSearch extends React.Component {
         super(props);
 
         this.state = {
-            criteria: this.props.selectDefaultValue || this.props.selectData[0],
-            selectText: this.props.selectDefaultValue || this.props.selectData[0],
+            criteria: this.props.selectDefaultValue.value || this.props.selectData[0].value,
+            selectText: this.props.selectDefaultValue.text || this.props.selectData[0].text,
             beforeOrAfter: 'before',
             inputText: undefined,
             inputTextError: undefined,
@@ -58,6 +58,7 @@ export default class ComboSearch extends React.Component {
         dateFormat: 'DD MMM YYYY',
         showRadioButtons: true,
         inputErrorMessage: 'This field is required and should be at least 3 characters long',
+        selectDefaultValue: {},
     };
 
     static propTypes = {
@@ -72,7 +73,7 @@ export default class ComboSearch extends React.Component {
         hasButton: PropTypes.bool,
         buttonPendingText: PropTypes.string,
         isInFetchingState: PropTypes.bool,
-        selectDefaultValue: PropTypes.string,
+        selectDefaultValue: PropTypes.object,
         datePickerCriteria: PropTypes.string,
         classNames: PropTypes.object,
         inputErrorMessage: PropTypes.string,
@@ -99,6 +100,9 @@ export default class ComboSearch extends React.Component {
             for (let pair of formData.entries()) {
                 data[pair[0]] = pair[1];
             }
+
+            data.selectText = this.state.selectText;
+            data.criteria = this.state.criteria;
 
             const filterAlreadyExists = this.state.appliedFilters.some(filter => {
                 return isEqual(omit(filter, ['momentDate']), omit(data, ['momentDate']));
@@ -263,7 +267,7 @@ export default class ComboSearch extends React.Component {
                                             className: 'Datepicker__input js-datepickerInput InputBox',
                                             'data-automation': 'fieldComboSearchDatePicker',
                                         }}
-                                        {...this.props.additionalDatePickerProps}
+                                        {...this.props.additionalDatePickerProps}a
                                     />}
                                 <i className="Datepicker__icon"> </i>
                                 {this.state.datePickerError ? (
@@ -283,7 +287,7 @@ export default class ComboSearch extends React.Component {
                                 ref={el => (this.textInput = el)}
                                 value={this.state.inputText || ''}
                                 className={this.props.classNames.textInput}
-                                placeholder={this.state.criteria || this.props.selectData[0]}
+                                placeholder={this.state.selectText}
                                 onChange={this.onInputChange}
                                 onBlur={this.clearErrorMessage}
                                 data-automation="fieldComboSearchTextInput"
