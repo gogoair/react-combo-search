@@ -58,6 +58,7 @@ export default class ComboSearch extends React.Component {
         dateFormat: 'DD MMM YYYY',
         showRadioButtons: true,
         inputErrorMessage: 'This field is required and should be at least 3 characters long',
+        selectErrorMessage: 'Select an option',
         selectDefaultValue: {},
     };
 
@@ -77,12 +78,26 @@ export default class ComboSearch extends React.Component {
         datePickerCriteria: PropTypes.string,
         classNames: PropTypes.object,
         inputErrorMessage: PropTypes.string,
+        selectErrorMessage: PropTypes.string,
         validationCallback: PropTypes.func,
         dateFormat: PropTypes.string,
         validDateFilter: PropTypes.func,
         additionalSelectProps: PropTypes.object,
         additionalDatePickerProps: PropTypes.object,
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (!isEqual(this.props.selectData[0], nextProps.selectData[0])) {
+            this.setState({
+                criteria: nextProps.selectDefaultValue
+                    ? nextProps.selectDefaultValue.value
+                    : nextProps.selectData[0].value,
+                selectText: nextProps.selectDefaultValue
+                    ? nextProps.selectDefaultValue.text
+                    : nextProps.selectData[0].text,
+            });
+        }
+    }
 
     changeCriteria(value, text) {
         this.setState({criteria: value, selectText: text, inputText: undefined, date: undefined, momentDate: undefined});
@@ -168,11 +183,14 @@ export default class ComboSearch extends React.Component {
     isFormValid() {
         if (this.textInput) {
             const isValidInput = this.validateTextInput(this.state.inputText);
+            const isValidSelect = !!this.state.criteria;
+
             this.setState({
                 inputTextError: !isValidInput ? this.props.inputErrorMessage : undefined,
+                selectError: !isValidSelect ? this.props.selectErrorMessage : undefined,
             });
 
-            return isValidInput;
+            return isValidInput && isValidSelect;
         } else {
             return true;
         }
@@ -227,6 +245,11 @@ export default class ComboSearch extends React.Component {
                                 disabled={this.props.selectData.length === 0}
                                 {...this.props.additionalSelectProps}
                             />}
+                        {this.state.selectError ? (
+                            <span className="ComboSearch__formError">{this.state.selectError}</span>
+                        ) : (
+                            false
+                        )}
                     </div>
                     {this.props.datePickerCriteria === this.state.criteria ? (
                         <div className={this.props.classNames.datePickerRadioWrapper}>
@@ -268,7 +291,7 @@ export default class ComboSearch extends React.Component {
                                             className: 'Datepicker__input js-datepickerInput Input',
                                             'data-automation': 'fieldComboSearchDatePicker',
                                         }}
-                                        {...this.props.additionalDatePickerProps}a
+                                        {...this.props.additionalDatePickerProps}
                                     />}
                                 <i className="Datepicker__icon"> </i>
                                 {this.state.datePickerError ? (
