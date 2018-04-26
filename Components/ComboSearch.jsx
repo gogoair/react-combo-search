@@ -75,7 +75,7 @@ export default class ComboSearch extends React.Component {
         buttonPendingText: PropTypes.string,
         isInFetchingState: PropTypes.bool,
         selectDefaultValue: PropTypes.object,
-        datePickerCriteria: PropTypes.string,
+        datePickerCriteria: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
         classNames: PropTypes.object,
         inputErrorMessage: PropTypes.string,
         selectErrorMessage: PropTypes.string,
@@ -221,6 +221,9 @@ export default class ComboSearch extends React.Component {
     render() {
         const selectRenderFnArgs = this.props.selectRenderFnArgs ? this.props.selectRenderFnArgs : [];
         const datePickerRenderFnArgs = this.props.datePickerRenderFnArgs ? this.props.datePickerRenderFnArgs : [];
+        const isDatePickerOpen = Array.isArray(this.props.datePickerCriteria)
+            ? this.props.datePickerCriteria.includes(this.state.criteria)
+            : this.props.datePickerCriteria === this.state.criteria;
 
         return (
             <form onSubmit={this.handleSubmit} ref={el => (this.form = el)} data-automation="regionComboSearchForm">
@@ -251,7 +254,7 @@ export default class ComboSearch extends React.Component {
                             false
                         )}
                     </div>
-                    {this.props.datePickerCriteria === this.state.criteria ? (
+                    {isDatePickerOpen ? (
                         <div className={this.props.classNames.datePickerRadioWrapper}>
                             <div className={this.props.classNames.radioGroupWrapper}>
                                 {this.props.showRadioButtons

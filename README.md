@@ -86,7 +86,7 @@ If you decide on using existing components, you may want to style them different
 | ------------ | ------- | ------- | ----------- |
 | **onSearch** | function | none | Callback to invoke on filter apply, gets passed form data as only argument
 | **selectData** | array of objects | none | Data for **react-combo-select** to populate select with options, with value and text props
-| **datePickerCriteria** | string | none | One of the option from **selectData** prop on which we want to open a date picker (value prop)
+| **datePickerCriteria** | string or array | none | One or more of the options from **selectData** prop on which we want to open a date picker, either a string or an array of strings (value prop)
 | **selectRenderFn** | function | none | Function that returns jsx for your custom select component. Since select is a controlled component this function will get called like **selectRenderFn(selectData, selectedText, selectedValue, changeCallback, ...yourArguments)**, where returning component sets its options to selectData, text to selectedText(optional), value to selectedValue and onChange to changeCallback. 
 | **selectRenderFnArgs** | array | none | Array of arguments that will get passed to **selectRenderFn** that you passed. Eg [1, 2, 3] will get spread as arguments
 | **datePickerRenderFn** | function | none | Similar to selectRenderFn, will get called as **datePickerRenderFn(changeCallback, ..yourArgs)**
